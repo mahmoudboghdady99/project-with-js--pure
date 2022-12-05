@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>cruds</title>
+</head>
+<body>
+<h2>CRUD</h2>
+<input type="text" id="box" placeholder="please enter your information">
+<button id="btn">ADD</button>
+<div id="container">
+
+</div>
+<script>
+var cntr=document.getElementById("container")
+var box=document.getElementById("box")
+var btn=document.getElementById("btn")
+var data=
+[
+    {id: 1, name: 'product1'},
+    {id: 2, name: 'product2'},
+    {id: 3, name: 'product3'},
+    {id: 4, name: 'product4'},
+];
+    function draw(items)
+    {
+        cntr.innerHTML='';
+        items.forEach(function(element)
+        {
+            cntr.innerHTML +=
+            `
+            <div  onClick=deleteitems(${element.id})>
+            ${element.name}
+            </div>
+            `
+        })
+    }
+    window.onload=function()
+    {
+        draw(data)
+    }
+    btn.addEventListener("click", additems)
+    function additems()
+    {
+        if(box.value=='')alert("please enter your information")
+        var addedid=data.length? data[data.length-1].id :0
+        data.push({id: ++addedid, name: box.value})
+        var lastitem=data[data.length-1]
+        cntr.innerHTML +=
+        `
+        <div onClick=deleteitems(${lastitem.id}) >
+            ${lastitem.name}
+            </div>
+        `
+            box.value='';
+
+    }
+  function deleteitems(id)
+  {
+    var index=data.map(function(i)
+    {
+        return i.id
+    }).indexOf(id)
+    if(index!==-1)
+    {data.splice(index, 1)  
+        
+        draw(data)}
+   
+  }
+   
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+   
